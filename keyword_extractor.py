@@ -1,0 +1,35 @@
+from google import genai
+import spacy
+import numpy
+from pypdf import PdfReader
+
+def rate_resume(text,description):
+
+    ner = spacy.load("en_core_web_md")
+
+    entities = ner(text)
+    
+    keywords = numpy.array([])
+    
+    for entity in entities.ents:
+        if entity.label_ == "WORK_OF_ART":
+           keywords = numpy.append(keywords,(entity.text).lower())
+    
+    for entity in entities:
+        if entity.pos_ == "NOUN" or entity.pos_ == "PROPN" :
+           keywords = numpy.append(keywords,(entity.text).lower())
+    
+    client = genai.Client(api_key="AIzaSyD0I7tw8w9wo3c7BFebS9PeJimi_GJWkT0")
+    
+    response = client.models.generate_content(model = "gemini-2.0-flash",contents=[f"just write the name of all the technical skills and one or two general skills present in {description} wihout any paranthesis seperated with comma"])
+    mentioned_skills = (str(response.text).lower()).split(",")
+    
+    mentioned = []
+    for skill in mentioned_skills:
+        mentioned.append(skill.strip()) 
+    
+    common_keywords = list(set(keywords) & set(mentioned))
+    skills_not_found = list(set(mentioned) - set(keywords))
+    
+    score = len(common_keywords)/len(mentioned)
+    return (score,skills_not_found)
