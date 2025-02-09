@@ -42,7 +42,7 @@ if type(min_score) == float or int:
         else:
             st.write("please provide a description")
     else:
-        st.write("please enter minimun score")
+        st.write("please enter minimun score to get filtered resumes")
 
     if done == True and seleted_resumes == 0:
        st.code("All resume scored below than required score")
