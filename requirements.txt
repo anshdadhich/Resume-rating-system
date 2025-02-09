@@ -3,3 +3,4 @@ pypdf
 spacy
 numpy
 google-genai
+en_core_web_lg
