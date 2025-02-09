@@ -1,12 +1,11 @@
 from google import genai
 import spacy
-import en_core_web_sm
 import numpy
 from pypdf import PdfReader
 
 def rate_resume(text,description):
 
-    ner = en_core_web_sm.load()
+    ner = spacy.load("en_web_core_lg")
 
     entities = ner(text)
     
