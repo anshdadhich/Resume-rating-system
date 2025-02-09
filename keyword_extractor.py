@@ -5,7 +5,7 @@ from pypdf import PdfReader
 
 def rate_resume(text,description):
 
-    ner = spacy.load("en_core_web_md")
+    ner = spacy.load("en_core_web_lg")
 
     entities = ner(text)
     
