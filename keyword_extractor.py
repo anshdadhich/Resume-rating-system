@@ -19,7 +19,7 @@ def rate_resume(text,description):
         if entity.pos_ == "NOUN" or entity.pos_ == "PROPN" :
            keywords = numpy.append(keywords,(entity.text).lower())
     
-    client = genai.Client(api_key=the_api_key)
+    client = genai.Client(api_key=st.secrets["the_api_key"])
     
     response = client.models.generate_content(model = "gemini-2.0-flash",contents=[f"just write the name of all the technical skills that are present in {description} wihout any paranthesis seperated with comma"])
     mentioned_skills = (str(response.text).lower()).split(",")
