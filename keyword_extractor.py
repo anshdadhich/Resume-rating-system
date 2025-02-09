@@ -21,7 +21,7 @@ def rate_resume(text,description):
     
     client = genai.Client(api_key="AIzaSyD0I7tw8w9wo3c7BFebS9PeJimi_GJWkT0")
     
-    response = client.models.generate_content(model = "gemini-2.0-flash",contents=[f"just write the name of all the technical skills and one or two general skills present in {description} wihout any paranthesis seperated with comma"])
+    response = client.models.generate_content(model = "gemini-2.0-flash",contents=[f"just write the name of all the technical skills that are present in {description} wihout any paranthesis seperated with comma"])
     mentioned_skills = (str(response.text).lower()).split(",")
     
     mentioned = []
