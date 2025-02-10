@@ -2,3 +2,4 @@ streamlit
 pypdf
 numpy
 spacy
+-q -U google-genai
