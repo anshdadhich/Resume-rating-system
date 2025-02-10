@@ -1,4 +1,5 @@
 from google import genai
+import streamlit as st
 import spacy
 import numpy
 from pypdf import PdfReader
