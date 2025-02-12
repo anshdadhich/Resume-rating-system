@@ -1,8 +1,13 @@
 from google import genai
-import streamlit as st
 import spacy
 import numpy
 from pypdf import PdfReader
+
+def readpdf(pdf):
+    reader = PdfReader(pdf)
+    page = reader.pages[0]
+    text = page.extract_text()
+    return text
 
 def rate_resume(text,description):
 
@@ -13,6 +18,7 @@ def rate_resume(text,description):
     keywords = numpy.array([])
     
     for entity in entities.ents:
+        print(entity.label_)
         if entity.label_ == "WORK_OF_ART":
            keywords = numpy.append(keywords,(entity.text).lower())
     
@@ -20,9 +26,9 @@ def rate_resume(text,description):
         if entity.pos_ == "NOUN" or entity.pos_ == "PROPN" :
            keywords = numpy.append(keywords,(entity.text).lower())
     
-    client = genai.Client(api_key=st.secrets["the_api_key"])
+    client = genai.Client(api_key="AIzaSyD0I7tw8w9wo3c7BFebS9PeJimi_GJWkT0")
     
-    response = client.models.generate_content(model = "gemini-2.0-flash",contents=[f"just write the name of all the technical skills that are present in {description} wihout any paranthesis seperated with comma"])
+    response = client.models.generate_content(model = "gemini-2.0-flash",contents=[f"just write the name of all the technical skills and one or two other general skills and the educational qualifications present in {description} wihout any paranthesis seperated with comma"])
     mentioned_skills = (str(response.text).lower()).split(",")
     
     mentioned = []
@@ -33,4 +39,4 @@ def rate_resume(text,description):
     skills_not_found = list(set(mentioned) - set(keywords))
     
     score = len(common_keywords)/len(mentioned)
-    return (score,skills_not_found)
+    return(score,skills_not_found)
