@@ -38,5 +38,5 @@ def rate_resume(text,description):
     common_keywords = list(set(keywords) & set(mentioned))
     skills_not_found = list(set(mentioned) - set(keywords))
     
-    score = len(common_keywords)/len(mentioned)
+    score = len(common_keywords)/len(mentioned) *100
     return(score,skills_not_found)
