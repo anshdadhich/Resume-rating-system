@@ -27,7 +27,7 @@ if type(min_score) == float or int:
     
     sorted_resumes = sorted(resume_text,key = lambda x: x[1])
     
-    seleted_resumes = 0
+    selected_resumes = 0
     
     done = False
     if min_score.strip() != "":
@@ -36,7 +36,7 @@ if type(min_score) == float or int:
            for sr in sorted_resumes:
                if resume_text[sr][1] > min_score:
                    st.code(sr + " : " + resume_text[sr][1])
-                   seleted_resumes += 1
+                   selected_resumes += 1
                if sr == sorted_resumes[-1]: 
                   done = True
         else:
