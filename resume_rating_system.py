@@ -7,7 +7,7 @@ st.set_page_config(layout = "wide")
 st.title("Resume Rating System")
 
 resumes = st.file_uploader("upload your resume",type = "pdf",accept_multiple_files = True)
-min_score = st.text_input("Enter Minimum score: (on a scale of 0 to 100)")
+min_score = st.text_input("Enter Minimum score:  (on a scale of 0 to 100)")
 if type(min_score) == float or int:
     
     resume_text = {}
