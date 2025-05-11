@@ -26,7 +26,7 @@ def rate_resume(text,description):
         if entity.pos_ == "NOUN" or entity.pos_ == "PROPN" :
            keywords = numpy.append(keywords,(entity.text).lower())
     
-    client = genai.Client(api_key="AIzaSyD0I7tw8w9wo3c7BFebS9PeJimi_GJWkT0")
+    client = genai.Client(api_key="")
     
     response = client.models.generate_content(model = "gemini-2.0-flash",contents=[f"just write the name of all the technical skills and one or two other general skills and the educational qualifications present in {description} wihout any paranthesis seperated with comma as if you are looking for keywords in a resume"])
     mentioned_skills = (str(response.text).lower()).split(",")
